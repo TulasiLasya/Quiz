@@ -14,32 +14,31 @@ function updateDashboardUI() {
     const card = document.getElementById(`lvl-card-${l}`);
     const indicator = card.querySelector(".status-indicator");
 
-    if (l < highestUnlockedLevel) {
-      card.classList.add("locked");
-      card.classList.remove("unlocked");
+    if (failedLevels.includes(l)) {
+      // Level Failed state layout
+      card.classList.remove("unlocked", "locked");
+      card.classList.add("failed-lock"); // Stylize in CSS if needed
       card.onclick = null;
-      indicator.innerHTML =
-        'COMPLETED <img src="lock.png" height="20" width="20" style="vertical-align:middle">';
-    } else if (l === highestUnlockedLevel) {
+      card.style.opacity = "0.4";
+      card.style.cursor = "not-allowed";
+      card.style.boxShadow = "none";
+      indicator.innerHTML = "FAILED ✖ (Locked)";
+    } else if (l <= highestUnlockedLevel) {
+      // Normal Unlocked Processing
       card.classList.remove("locked");
       card.classList.add("unlocked");
+      card.style.opacity = "1";
+      card.style.cursor = "pointer";
       card.onclick = () => selectDashboardLevel(l);
-      indicator.innerHTML = '<span class="pulse-dot"></span> READY TO RUN';
+      indicator.innerText =
+        l < highestUnlockedLevel ? "COMPLETED" : "READY TO RUN";
     } else {
+      // Standard Locked processing
       card.classList.add("locked");
       card.classList.remove("unlocked");
       card.onclick = null;
-      indicator.innerHTML =
-        'LOCKED <img src="lock.png" height="20" width="20" style="vertical-align:middle">';
-    }
-  }
-
-  const appreciationMsg = document.getElementById("appreciation-msg");
-  if (appreciationMsg) {
-    if (highestUnlockedLevel > 3) {
-      appreciationMsg.classList.remove("hide");
-    } else {
-      appreciationMsg.classList.add("hide");
+      card.style.opacity = "0.35";
+      indicator.innerHTML = `LOCKED <img src="lock.png" height="20" width="20"/>`;
     }
   }
 }

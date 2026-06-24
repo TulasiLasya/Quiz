@@ -3,6 +3,8 @@ let shuffledQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
 let canClick = true;
+// Add or verify these variables exist in your js/state.js file:
+let failedLevels = []; // Tracks levels that the user has failed
 
 // Timing Control Sets
 let timerInterval = null;
