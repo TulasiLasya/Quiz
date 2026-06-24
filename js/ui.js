@@ -59,3 +59,33 @@ function switchScreenContext(viewportClass, screenId, overrideTheme = null) {
 function updateProgressBarFinal() {
   document.getElementById("progress-bar-fill").style.width = `100%`;
 }
+
+const levelTitles = {
+  1: "EXPLORER MODE",
+  2: "CHALLENGER MODE",
+  3: "LEGEND MODE"
+};
+
+function showLevelIntro(levelNum) {
+  const stageNum = document.getElementById("intro-stage-number");
+  const stageTitle = document.getElementById("intro-stage-title");
+  const flash = document.getElementById("lightning-effect");
+  const content = document.querySelector(".intro-content");
+  
+  stageNum.innerText = `STAGE 0${levelNum}`;
+  stageTitle.innerText = levelTitles[levelNum];
+  
+  flash.classList.remove("strike");
+  content.classList.remove("animate");
+  
+  void flash.offsetWidth; // force reflow
+  
+  switchScreenContext("view-intro", "intro-screen", levelNum);
+  
+  flash.classList.add("strike");
+  content.classList.add("animate");
+  
+  setTimeout(() => {
+    startQuizLevel();
+  }, 2000);
+}

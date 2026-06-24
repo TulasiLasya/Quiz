@@ -1,147 +1,154 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OpenHack Quiz Platform</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body id="app-viewport" class="view-dashboard level-theme-0">
-    <!-- FRONT PAGE: DASHBOARD HUB -->
-    <div id="dashboard-screen" class="screen-wrapper">
-      <!-- GLOBAL RESET ANCHOR IN RIGHT CORNER -->
-      <button class="global-reset-corner-btn" onclick="hardResetPlatform()">
-        Reset System ↺
-      </button>
 
-      <main class="dashboard-content">
-        <section class="hero-center">
-          <h1 class="hero-main-title">OpenHack Quiz</h1>
-          <p class="hero-tagline">
-            Fast-paced tech trivia. Pure velocity. Zero friction.
-          </p>
-        </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenHack Quiz Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-        <div id="appreciation-msg" class="hide" style="text-align: center; margin-bottom: 40px; color: var(--neon-emerald); font-weight: 800; font-size: 24px; text-shadow: 0 0 15px rgba(0, 245, 212, 0.4);">
-          🎉 ALL STAGES CONQUERED! Welcome to the Hall of Fame! 🎉
-        </div>
+<body id="app-viewport" class="view-dashboard level-theme-0">
+  <!-- FRONT PAGE: DASHBOARD HUB -->
+  <div id="dashboard-screen" class="screen-wrapper">
+    <!-- GLOBAL RESET ANCHOR IN RIGHT CORNER -->
+    <button class="global-reset-corner-btn" onclick="hardResetPlatform()">
+      Reset System ↺
+    </button>
 
-        <!-- HORIZONTAL ROW LAYOUT FOR STAGES -->
-        <div class="level-horizontal-row">
-          <!-- Level 1 Card -->
-          <div
-            id="lvl-card-1"
-            class="stage-card unlocked"
-            onclick="selectDashboardLevel(1)"
-          >
-            <div class="card-status">
-              <span class="status-indicator">READY</span>
-            </div>
-            <div class="card-meta">
-              <span class="stage-index">STAGE 01</span>
-              <h3 class="stage-title">Git & Open Source</h3>
-            </div>
+    <main class="dashboard-content">
+      <section class="hero-center">
+        <h1 class="hero-main-title">OpenHack Quiz</h1>
+        <p class="hero-tagline">
+          Fast-paced tech trivia. Pure velocity. Zero friction.
+        </p>
+      </section>
+
+      <div id="appreciation-msg" class="hide"
+        style="text-align: center; margin-bottom: 40px; color: var(--neon-emerald); font-weight: 800; font-size: 24px; text-shadow: 0 0 15px rgba(0, 245, 212, 0.4);">
+        🎉 ALL STAGES CONQUERED! Welcome to the Hall of Fame! 🎉
+      </div>
+
+      <!-- HORIZONTAL ROW LAYOUT FOR STAGES -->
+      <div class="level-horizontal-row">
+        <!-- Level 1 Card -->
+        <div id="lvl-card-1" class="stage-card unlocked" onclick="selectDashboardLevel(1)">
+          <div class="card-status">
+            <span class="status-indicator">READY</span>
           </div>
-
-          <!-- Level 2 Card -->
-          <div id="lvl-card-2" class="stage-card locked">
-            <div class="card-status">
-              <span class="status-indicator">LOCKED 🔒</span>
-            </div>
-            <div class="card-meta">
-              <span class="stage-index">STAGE 02</span>
-              <h3 class="stage-title">Linux & Cyber</h3>
-            </div>
-          </div>
-
-          <!-- Level 3 Card -->
-          <div id="lvl-card-3" class="stage-card locked">
-            <div class="card-status">
-              <span class="status-indicator">LOCKED 🔒</span>
-            </div>
-            <div class="card-meta">
-              <span class="stage-index">STAGE 03</span>
-              <h3 class="stage-title">Dev Culture & Trivia</h3>
-            </div>
+          <div class="card-meta">
+            <span class="stage-index">STAGE 01</span>
+            <h3 class="stage-title">Git & Open Source</h3>
           </div>
         </div>
+
+        <!-- Level 2 Card -->
+        <div id="lvl-card-2" class="stage-card locked">
+          <div class="card-status">
+            <span class="status-indicator">LOCKED 🔒</span>
+          </div>
+          <div class="card-meta">
+            <span class="stage-index">STAGE 02</span>
+            <h3 class="stage-title">Linux & Cyber</h3>
+          </div>
+        </div>
+
+        <!-- Level 3 Card -->
+        <div id="lvl-card-3" class="stage-card locked">
+          <div class="card-status">
+            <span class="status-indicator">LOCKED 🔒</span>
+          </div>
+          <div class="card-meta">
+            <span class="stage-index">STAGE 03</span>
+            <h3 class="stage-title">Dev Culture & Trivia</h3>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- LEVEL INTRO SCREEN -->
+  <div id="intro-screen" class="screen-wrapper hide">
+    <div class="lightning-flash" id="lightning-effect"></div>
+    <div class="intro-content">
+      <h2 id="intro-stage-number" class="intro-stage-number">STAGE 01</h2>
+      <h1 id="intro-stage-title" class="intro-stage-title">EXPLORER</h1>
+    </div>
+  </div>
+
+  <!-- ACTIVE QUIZ PANELS -->
+  <div id="quiz-screen" class="screen-wrapper hide">
+    <div class="arena-focus-box">
+      <header class="arena-header">
+        <div class="arena-meta">
+          <span id="current-level-text" class="meta-pill">STAGE 01</span>
+          <span id="question-counter" class="meta-pill tracking-pill">1 / 5</span>
+        </div>
+        <!-- TIMER PILL -->
+        <div class="timer-badge">
+          <span id="timer-seconds">15</span><span class="timer-ms">s</span>
+        </div>
+      </header>
+
+      <div class="arena-progress-track">
+        <div id="progress-bar-fill"></div>
+      </div>
+
+      <main class="arena-body">
+        <h2 id="question-text">Initializing parameters...</h2>
+        <div id="answer-buttons" class="option-selection-stack"></div>
       </main>
     </div>
+  </div>
 
-    <!-- ACTIVE QUIZ PANELS -->
-    <div id="quiz-screen" class="screen-wrapper hide">
-      <div class="arena-focus-box">
-        <header class="arena-header">
-          <div class="arena-meta">
-            <span id="current-level-text" class="meta-pill">STAGE 01</span>
-            <span id="question-counter" class="meta-pill tracking-pill"
-              >1 / 5</span
-            >
-          </div>
-          <!-- TIMER PILL -->
-          <div class="timer-badge">
-            <span id="timer-seconds">15</span><span class="timer-ms">s</span>
-          </div>
-        </header>
-
-        <div class="arena-progress-track">
-          <div id="progress-bar-fill"></div>
-        </div>
-
-        <main class="arena-body">
-          <h2 id="question-text">Initializing parameters...</h2>
-          <div id="answer-buttons" class="option-selection-stack"></div>
-        </main>
+  <!-- ARENA PERFORMANCE SUMMARY REPORT -->
+  <div id="result-screen" class="screen-wrapper hide">
+    <div class="report-box">
+      <h1 id="result-title">EVALUATION</h1>
+      <div class="score-container">
+        <span id="final-score">0</span><span class="score-max">/ 5</span>
+      </div>
+      <div id="highlight-time-container" class="highlight-time-container hide">
+        <span class="time-label">Time Taken:</span>
+        <span id="level-highlight-time" class="time-val">0s</span>
+      </div>
+      <p id="result-msg" class="summary-text"></p>
+      <div class="report-actions">
+        <button id="action-btn" class="action-btn-primary">Return to Home Page</button>
       </div>
     </div>
+  </div>
 
-    <!-- ARENA PERFORMANCE SUMMARY REPORT -->
-    <div id="result-screen" class="screen-wrapper hide">
-      <div class="report-box">
-        <h1 id="result-title">EVALUATION</h1>
-        <div class="score-container">
-          <span id="final-score">0</span><span class="score-max">/ 5</span>
+  <!-- GRAND FINALE SCREEN -->
+  <div id="finale-screen" class="screen-wrapper hide">
+    <div class="report-box finale-box">
+      <div class="finale-glow"></div>
+      <h1 class="finale-title">CHAMPION!</h1>
+      <p class="finale-subtitle">All System Stages Conquered</p>
+      <div class="finale-stats-container">
+        <div class="finale-stat-card">
+          <span class="stat-label">Total Time</span>
+          <span id="finale-time" class="stat-val">0s / 225s</span>
         </div>
-        <div id="highlight-time-container" class="highlight-time-container hide">
-          <span class="time-label">Time Taken:</span>
-          <span id="level-highlight-time" class="time-val">0s</span>
-        </div>
-        <p id="result-msg" class="summary-text"></p>
-        <div class="report-actions">
-          <button id="action-btn" class="action-btn-primary">Return to Home Page</button>
+        <div class="finale-stat-card">
+          <span class="stat-label">Final Score</span>
+          <span id="finale-total-score" class="stat-val">15 / 15</span>
         </div>
       </div>
-    </div>
-
-    <!-- GRAND FINALE SCREEN -->
-    <div id="finale-screen" class="screen-wrapper hide">
-      <div class="report-box finale-box">
-        <div class="finale-glow"></div>
-        <h1 class="finale-title">CHAMPION!</h1>
-        <p class="finale-subtitle">All System Stages Conquered</p>
-        <div class="finale-stats-container">
-          <div class="finale-stat-card">
-            <span class="stat-label">Total Time</span>
-            <span id="finale-time" class="stat-val">0s / 225s</span>
-          </div>
-          <div class="finale-stat-card">
-            <span class="stat-label">Final Score</span>
-            <span id="finale-total-score" class="stat-val">15 / 15</span>
-          </div>
-        </div>
-        <div class="report-actions">
-          <button class="action-btn-primary finale-btn" onclick="hardResetPlatform()">Play Again</button>
-        </div>
+      <div class="report-actions">
+        <button class="action-btn-primary finale-btn" onclick="hardResetPlatform()">Play Again</button>
       </div>
     </div>
+  </div>
 
-    <script src="js/data.js"></script>
-    <script src="js/state.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/timer.js"></script>
-    <script src="js/results.js"></script>
-    <script src="js/quiz.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/results.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
 </html>

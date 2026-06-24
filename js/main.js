@@ -20,7 +20,7 @@ function showDashboard() {
 function selectDashboardLevel(levelNum) {
   currentLevel = levelNum;
   applyThemeContext(levelNum);
-  startQuizLevel();
+  showLevelIntro(levelNum);
 }
 
 // System Init Core Routine (No local storage means it resets on every browser window reload)
