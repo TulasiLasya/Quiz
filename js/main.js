@@ -32,7 +32,7 @@ function showDashboard() {
   const appreciationMsg = document.getElementById("appreciation-msg");
   if (highestUnlockedLevel > 3 && failedLevels.length === 0) {
     appreciationMsg.innerText =
-      '🎉 git commit -m "CHALLENGE CONQUERED" — YOU ARE A CERTIFIED LEGEND! 🎉';
+      '🎉 git commit -m "CHALLENGE CONQUERED" ';
     appreciationMsg.classList.remove("hide");
   } else {
     appreciationMsg.classList.add("hide");
