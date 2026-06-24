@@ -23,10 +23,8 @@ function selectDashboardLevel(levelNum) {
   showLevelIntro(levelNum);
 }
 
-// System Init Core Routine (No local storage means it resets on every browser window reload)
-window.onload = () => {
-  hardResetPlatform();
-};
+// System Init Core Routine — startup is managed by js/boot.js
+// window.onload is defined there and calls hardResetPlatform() after the boot sequence
 
 // Global keyboard event listener for option selection
 document.addEventListener("keydown", (e) => {

@@ -1,0 +1,116 @@
+/* ==========================================
+   OPENHACK CIRCUIT HERO BACKGROUND
+   ========================================== */
+
+.hero-center {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Keep text above circuit layer */
+.hero-main-title,
+.hero-tagline {
+  position: relative;
+  z-index: 2;
+}
+
+/* Circuit container */
+.circuit-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Nodes */
+.circuit-node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  background: var(--neon-cyan);
+
+  box-shadow:
+    0 0 10px var(--neon-cyan),
+    0 0 20px var(--neon-cyan);
+
+  animation: pulseNode 3s ease-in-out infinite;
+}
+
+/* Node positions */
+.n1 {
+  top: 20%;
+  left: 18%;
+}
+
+.n2 {
+  top: 38%;
+  left: 34%;
+}
+
+.n3 {
+  top: 18%;
+  right: 25%;
+}
+
+.n4 {
+  top: 40%;
+  right: 12%;
+}
+
+/* Lines */
+.circuit-line {
+  position: absolute;
+  height: 2px;
+
+  background: rgba(0, 240, 255, 0.2);
+
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+/* Line positions */
+.l1 {
+  width: 140px;
+  top: 22%;
+  left: 19%;
+}
+
+.l2 {
+  width: 180px;
+  top: 20%;
+  right: 24%;
+}
+
+.l3 {
+  width: 140px;
+  top: 39%;
+  left: 35%;
+  transform: rotate(-15deg);
+}
+
+/* Pulse Animation */
+@keyframes pulseNode {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* Mobile Cleanup */
+@media (max-width: 768px) {
+  .circuit-bg {
+    opacity: 0.5;
+  }
+
+  .l2,
+  .n4 {
+    display: none;
+  }
+}

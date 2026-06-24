@@ -1,0 +1,392 @@
+/* ==================================================
+   OPENHACK - GIT NETWORK BACKGROUND
+   GitHub-style branching graph around screen edges
+   ================================================== */
+
+/* Main background layer */
+.git-network-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Dashboard content stays above graph */
+.dashboard-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==================================================
+   CLUSTERS
+   ================================================== */
+
+.git-cluster {
+  position: absolute;
+  opacity: 0.18;
+}
+
+/* Corner positions */
+
+.cluster-tl {
+  top: 6%;
+  left: 4%;
+  width: 240px;
+  height: 140px;
+}
+
+.cluster-tr {
+  top: 8%;
+  right: 4%;
+  width: 280px;
+  height: 160px;
+}
+
+.cluster-bl {
+  bottom: 8%;
+  left: 5%;
+  width: 260px;
+  height: 150px;
+}
+
+.cluster-br {
+  bottom: 8%;
+  right: 5%;
+  width: 280px;
+  height: 160px;
+}
+
+/* ==================================================
+   NODES
+   ================================================== */
+
+.node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  background: var(--neon-cyan);
+
+  box-shadow:
+    0 0 8px var(--neon-cyan),
+    0 0 18px rgba(0, 240, 255, 0.6);
+
+  animation: gitPulse 3s ease-in-out infinite;
+}
+
+/* Stagger pulse timing */
+
+.node:nth-child(1) {
+  animation-delay: 0s;
+}
+.node:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.node:nth-child(3) {
+  animation-delay: 1.2s;
+}
+.node:nth-child(4) {
+  animation-delay: 1.8s;
+}
+
+/* ==================================================
+   TOP LEFT GRAPH
+   ================================================== */
+
+.cluster-tl .n1 {
+  top: 15px;
+  left: 10px;
+}
+.cluster-tl .n2 {
+  top: 15px;
+  left: 90px;
+}
+.cluster-tl .n3 {
+  top: 75px;
+  left: 150px;
+}
+
+.cluster-tl .b1 {
+  top: 19px;
+  left: 20px;
+  width: 72px;
+}
+
+.cluster-tl .b2 {
+  width: 82px;
+  top: 50px;
+  left: 88px;
+  transform: rotate(35deg);
+}
+
+/* ==================================================
+   TOP RIGHT GRAPH
+   ================================================== */
+
+.cluster-tr .n1 {
+  top: 25px;
+  left: 20px;
+}
+.cluster-tr .n2 {
+  top: 25px;
+  left: 100px;
+}
+.cluster-tr .n3 {
+  top: 80px;
+  left: 170px;
+}
+.cluster-tr .n4 {
+  top: 25px;
+  left: 240px;
+}
+
+.cluster-tr .b1 {
+  top: 29px;
+  left: 30px;
+  width: 72px;
+}
+
+.cluster-tr .b2 {
+  width: 85px;
+  top: 55px;
+  left: 95px;
+  transform: rotate(35deg);
+}
+
+.cluster-tr .b3 {
+  top: 29px;
+  left: 175px;
+  width: 72px;
+}
+
+/* ==================================================
+   BOTTOM LEFT GRAPH
+   ================================================== */
+
+.cluster-bl .n1 {
+  top: 95px;
+  left: 20px;
+}
+.cluster-bl .n2 {
+  top: 30px;
+  left: 100px;
+}
+.cluster-bl .n3 {
+  top: 95px;
+  left: 190px;
+}
+
+.cluster-bl .b1 {
+  width: 95px;
+  top: 62px;
+  left: 28px;
+  transform: rotate(-35deg);
+}
+
+.cluster-bl .b2 {
+  width: 95px;
+  top: 62px;
+  left: 105px;
+  transform: rotate(35deg);
+}
+
+/* ==================================================
+   BOTTOM RIGHT GRAPH
+   ================================================== */
+
+.cluster-br .n1 {
+  top: 95px;
+  left: 20px;
+}
+.cluster-br .n2 {
+  top: 35px;
+  left: 95px;
+}
+.cluster-br .n3 {
+  top: 95px;
+  left: 170px;
+}
+.cluster-br .n4 {
+  top: 35px;
+  left: 245px;
+}
+
+.cluster-br .b1 {
+  width: 90px;
+  top: 65px;
+  left: 22px;
+  transform: rotate(-35deg);
+}
+
+.cluster-br .b2 {
+  width: 90px;
+  top: 65px;
+  left: 100px;
+  transform: rotate(35deg);
+}
+
+.cluster-br .b3 {
+  width: 78px;
+  top: 39px;
+  left: 175px;
+}
+
+/* ==================================================
+   BRANCHES
+   ================================================== */
+
+.branch {
+  position: absolute;
+  height: 2px;
+
+  background: rgba(0, 240, 255, 0.45);
+
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.5);
+}
+
+/* ==================================================
+   MOVING COMMIT PULSE
+   ================================================== */
+
+.branch::after {
+  content: "";
+
+  position: absolute;
+  top: -2px;
+  left: 0;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  box-shadow:
+    0 0 8px white,
+    0 0 14px var(--neon-cyan);
+
+  animation: travelCommit 4s linear infinite;
+}
+
+/* Different speeds */
+
+.cluster-tr .branch::after {
+  animation-duration: 5s;
+}
+
+.cluster-bl .branch::after {
+  animation-duration: 6s;
+}
+
+.cluster-br .branch::after {
+  animation-duration: 5.5s;
+}
+
+/* ==================================================
+   ANIMATIONS
+   ================================================== */
+
+@keyframes gitPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes travelCommit {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: calc(100% - 8px);
+    opacity: 0;
+  }
+}
+
+/* ==================================================
+   EXTRA FLOATING COMMITS
+   ================================================== */
+
+.git-network-bg::before,
+.git-network-bg::after {
+  content: "";
+
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+
+  animation: floatingCommit 10s linear infinite;
+}
+
+.git-network-bg::before {
+  top: 20%;
+  left: 10%;
+}
+
+.git-network-bg::after {
+  bottom: 18%;
+  right: 12%;
+  animation-delay: 4s;
+}
+
+@keyframes floatingCommit {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(120px);
+    opacity: 0;
+  }
+}
+
+/* ==================================================
+   MOBILE
+   ================================================== */
+
+@media (max-width: 900px) {
+  .git-cluster {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+
+  .cluster-tr,
+  .cluster-br {
+    display: none;
+  }
+}

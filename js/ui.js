@@ -18,17 +18,19 @@ function updateDashboardUI() {
       card.classList.add("locked");
       card.classList.remove("unlocked");
       card.onclick = null;
-      indicator.innerText = "COMPLETED 🔒";
+      indicator.innerHTML =
+        'COMPLETED <img src="lock.png" height="20" width="20" style="vertical-align:middle">';
     } else if (l === highestUnlockedLevel) {
       card.classList.remove("locked");
       card.classList.add("unlocked");
       card.onclick = () => selectDashboardLevel(l);
-      indicator.innerText = "READY TO RUN";
+      indicator.innerHTML = '<span class="pulse-dot"></span> READY TO RUN';
     } else {
       card.classList.add("locked");
       card.classList.remove("unlocked");
       card.onclick = null;
-      indicator.innerText = "LOCKED 🔒";
+      indicator.innerHTML =
+        'LOCKED <img src="lock.png" height="20" width="20" style="vertical-align:middle">';
     }
   }
 
@@ -63,7 +65,7 @@ function updateProgressBarFinal() {
 const levelTitles = {
   1: "EXPLORER MODE",
   2: "CHALLENGER MODE",
-  3: "LEGEND MODE"
+  3: "LEGEND MODE",
 };
 
 function showLevelIntro(levelNum) {
@@ -71,20 +73,20 @@ function showLevelIntro(levelNum) {
   const stageTitle = document.getElementById("intro-stage-title");
   const flash = document.getElementById("lightning-effect");
   const content = document.querySelector(".intro-content");
-  
+
   stageNum.innerText = `STAGE 0${levelNum}`;
   stageTitle.innerText = levelTitles[levelNum];
-  
+
   flash.classList.remove("strike");
   content.classList.remove("animate");
-  
+
   void flash.offsetWidth; // force reflow
-  
+
   switchScreenContext("view-intro", "intro-screen", levelNum);
-  
+
   flash.classList.add("strike");
   content.classList.add("animate");
-  
+
   setTimeout(() => {
     startQuizLevel();
   }, 2000);
